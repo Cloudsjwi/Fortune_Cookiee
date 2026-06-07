@@ -2,13 +2,10 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-    content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Fortune Cookie</title>
-
-    <style>
-
+<style>
 body{
     margin:0;
     min-height:100vh;
@@ -53,19 +50,16 @@ button:hover{
 
 #pesan{
     margin-top:25px;
-
-    max-width:90px;
-   
+    max-width:500px;
+    width:90%;
     padding:20px;
 
     background:rgba(255,248,240,0.35);
-
     backdrop-filter:blur(10px);
 
     border-radius:20px;
 
     color:#6b4f3a;
-
     font-size:18px;
 
     display:none;
@@ -76,29 +70,37 @@ h1{
     font-size:50px;
 }
 
-@media (max-width: 768px){
+.cookie-title{
+    width:70px;
+    height:auto;
+    vertical-align:middle;
+    margin-right:8px;
+}
+
+@media (max-width:768px){
 
     h1{
-        font-size:40px;
+        font-size:32px;
     }
 
     p{
         font-size:16px;
+        padding:0 20px;
     }
 
     button{
         font-size:16px;
-        padding:15px 25px;
+        padding:12px 20px;
     }
 
     #pesan{
-        width:80%;
+        width:85%;
         font-size:16px;
     }
 
     .cookie-title{
         width:45px;
-        margin-right:8px;
+        margin-right:6px;
     }
 
 }
@@ -140,12 +142,20 @@ button{
 .love{
     position:fixed;
     pointer-events:none;
-    z-index:1;
+    animation: float 4s ease-in-out infinite;
+    z-index: 1;
+    opacity: 0.6;
+    filter: blur(0.5px);
+}
 
-    opacity:0.6;
-    filter:blur(0.5px);
+.left{
+    left:10%;
+    top:25%;
+}
 
-    animation:float 4s ease-in-out infinite;
+.right{
+    right:10%;
+    top:65%;
 }
 
 @keyframes float{
@@ -160,7 +170,6 @@ button{
         rotate(var(--rot))
         translateY(-15px);
     }
-
 }
 
 </style>
@@ -176,103 +185,99 @@ button{
     Fortune Cookie
     </h1>
 
-    
-
     <p>Klik cookie untuk menerima pesan rahasia</p>
 
     <button id="cookieBtn">
-    🥠 Reveal Message
+    -`♡´- Reveal Message
     </button>
 
     <div id="pesan"></div>
 
-<script>
+    <script>
 
 const daftarPesan = [
 
 "✨ Kamu hebat hari ini.",
+
 "🌷 Jangan lupa istirahat sebentar.",
+
 "🍦 Es krim virtual telah dikirim.",
+
 "🐸 Status hari ini: Kodok Premium.",
+
 "💖 Ada hal baik yang menunggumu.",
+
 "☕ Jangan lupa minum yang hangat.",
+
 "📮 Seseorang mungkin sedang memikirkanmu."
 
 ];
 
 const tombol = document.getElementById("cookieBtn");
 const pesan = document.getElementById("pesan");
-const loveContainer = document.getElementById("love-container");
-
-function createLove() {
-
-    const love = document.createElement("img");
-
-    love.src = "love.png";
-    love.classList.add("love");
-
-    // posisi random
-    love.style.left = Math.random() * 100 + "vw";
-    love.style.top = Math.random() * 100 + "vh";
-
-    // ukuran random
-    const size = 20 + Math.random() * 80;
-    love.style.width = size + "px";
-
-    // rotasi random
-    const rotate = Math.random() * 360;
-    love.style.setProperty("--rot", rotate + "deg");
-
-    // opacity random
-    love.style.opacity = 0.3 + Math.random() * 0.7;
-
-    // kecepatan animasi random
-    love.style.animationDuration =
-        (2 + Math.random() * 6) + "s";
-
-    loveContainer.appendChild(love);
-
-    // hilang setelah 5 detik
-    setTimeout(() => {
-        love.remove();
-    }, 5000);
-}
 
 tombol.addEventListener("click", () => {
 
     const random =
-    daftarPesan[
-        Math.floor(
-            Math.random() * daftarPesan.length
-        )
-    ];
+    daftarPesan[Math.floor(Math.random() * daftarPesan.length)];
 
     pesan.style.display = "block";
-
     pesan.classList.remove("show");
     void pesan.offsetWidth;
     pesan.classList.add("show");
-
     pesan.innerHTML =
-        "<b>❤︎♡ Pesan untukmu hari ini</b><br><br>" +
-        random;
+    "<b> ❤︎♡ Pesan untukmu hari ini</b><br><br>" + random;
+    tombol.innerHTML = "🥠 Open Another Fortune";
 
-    tombol.innerHTML =
-        "🥠 Open Another Fortune";
+loveContainer.innerHTML = "";
 
-    // bersihin love lama
-    loveContainer.innerHTML = "";
+const jumlahLove =
+window.innerWidth < 768 ? 15 : 25;
 
-    // munculin love satu-satu
-    for(let i = 0; i < 20; i++){
+for(let i = 0; i < jumlahLove; i++){
+    setTimeout(() => {
+        createLove();
+    }, i * 80);
 
-        setTimeout(() => {
-            createLove();
-        }, i * 80);
 
-    }
+}
+    
 
 });
+
+const loveContainer = document.getElementById("love-container");
+
+function createLove() {
+    const love = document.createElement("img");
+    love.src = "love.png";
+    love.classList.add("love");
+
+    // posisi random lebih “liar”
+    love.style.left = Math.random() * 100 + "vw";
+    love.style.top = Math.random() * 100 + "vh";
+
+    // size random lebih variatif
+    const size = 15 + Math.random() * 60;
+    love.style.width = size + "px";
+
+    // rotasi random (lebih ekstrem)
+    const rotate = Math.random() * 360;
+
+     love.style.setProperty(
+      "--rot",
+     rotate + "deg"
+    );
+
+    // opacity random biar ada depth
+    love.style.opacity = 0.3 + Math.random() * 0.7;
+
+    // speed animasi random
+    love.style.animationDuration = (2 + Math.random() * 6) + "s";
+
+    loveContainer.appendChild(love);
+}
+
+
 
 </script>
 </body>
