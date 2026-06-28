@@ -1,0 +1,21 @@
+{
+  "name": "Fortune Cookie",
+  "short_name": "Fortune Cookie",
+  "description": "Klik cookie untuk menerima pesan rahasia setiap hari",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#fdf8ef",
+  "theme_color": "#6b4f3a",
+"icons": [
+    {
+      "src": "assets/Fortune_Cookie.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/Fortune_Cookie.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
