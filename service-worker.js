@@ -1,4 +1,4 @@
-const CACHE_NAME = "fortune-cookie-v1";
+const CACHE_NAME = "fortune-cookie-v2";
 
 const FILES_TO_CACHE = [
     "./",
