@@ -6,10 +6,16 @@
 
     <title>Fortune Cookie</title>
 
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#6b4f3a">
+    <link rel="apple-touch-icon" href="assets/Fortune_Cookie.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
-    
+
 <style>
 body{
     margin:0;
@@ -177,6 +183,456 @@ button{
     }
 }
 
+/* === BAGIAN KATEGORI === */
+#kategori-container {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.kat-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 8px 18px 8px 10px;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,0.6);
+    background: rgba(255,255,255,0.75);
+    backdrop-filter: blur(10px);
+    color: #6b4f3a;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: 'Quicksand', sans-serif;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 4px 12px rgba(107,79,58,0.08);
+}
+
+.kat-btn .kat-icon{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: rgba(255,248,240,0.9);
+    font-size: 14px;
+}
+
+.kat-btn:hover {
+    transform: scale(1.05);
+}
+
+.kat-btn.active {
+    background: rgba(222,196,160,0.6);
+    border-color: rgba(107,79,58,0.3);
+}
+
+.kat-btn.active .kat-icon{
+    background: rgba(255,255,255,0.9);
+}
+
+@media (max-width: 768px) {
+    .kat-btn {
+        font-size: 13px;
+        padding: 7px 14px;
+    }
+}
+
+/* === HIGHLIGHT KATEGORI === */
+.kategori-highlight{
+    animation: kategoriPulse 1s ease;
+    border-radius:999px;
+}
+
+@keyframes kategoriPulse{
+    0%, 100%{
+        box-shadow:none;
+    }
+    50%{
+        box-shadow:0 0 0 10px rgba(222,196,160,0.5);
+    }
+}
+
+/* === AKSI PESAN (Favorit + Share) === */
+.aksi-pesan{
+    display:flex;
+    gap:10px;
+    justify-content:center;
+    flex-wrap:wrap;
+}
+
+/* === AKSI PESAN (Favorit + Share) === */
+.rarity-badge{
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 4px 14px;
+    border-radius: 999px;
+    margin-bottom: 10px;
+}
+
+.rarity-badge.legendary{
+    background: linear-gradient(90deg, rgba(255,223,128,0.7),  rgba(255,180,80,0.7));
+    color: #7a4f00;
+    animation: legendaryShimmer 1.5s ease-in-out infinite;
+}
+
+@keyframes legendaryShimmer{
+    0%, 100%{opacity:1;}
+    50%{opacity:0.65;}
+}
+
+#pesan.rare-glow{
+    box-shadow: 0 0 25px rgba(255,200,100,0.6);
+    border: 1px solid rgba(255,200,100,0.6);
+}
+
+#pesan.legendary-glow{
+    box-shadow: 0 0 25px rgba(255,223,128,0.6);
+    border: 1px solid rgba(255,223,128,0.6);
+}
+
+@keyframes legendaryBoxGlow{
+    0%, 100%{ box-shadow:0 0 35px rgba(255,180,60,0.0);}
+    50%{ box-shadow:0 0 55px rgba(255,180,60,1);}
+}
+
+/* === DAILY FORTUNE (Note Style) === */
+.lock-wrapper{
+    position:relative;
+    max-width:420px;
+    width:90%;
+    margin:25px auto 0;
+    z-index:5;
+}
+
+.lock-wrapper .tape-img{
+    position:absolute;
+    top:-18px;
+    left:50%;
+    width:100px;
+    transform:translateX(-50%) rotate(-3deg);
+    z-index:3;
+}
+
+.lock-wrapper .paperclip-img{
+    position:absolute;
+    top:-12px;
+    right:10px;
+    width:48px;
+    transform:rotate(8deg);
+    z-index:3;
+}
+
+.lock-note{
+    position:relative;
+    max-width:420px;
+    width:90%;
+    margin:25px auto 0;
+    padding:45px 28px 30px;
+
+    background:repeating-linear-gradient(
+        to bottom,
+        #fdf8ef,
+        #fdf8ef 27px,
+        rgba(107,79,58,0.08) 28px
+    );
+
+    border-radius:6px;
+    text-align:left;
+    color:#6b4f3a;
+
+    clip-path: polygon(
+        0% 2%, 5% 0%, 10% 3%, 15% 1%, 20% 4%, 25% 0%, 30% 3%, 35% 1%, 40% 4%, 45% 0%,
+        50% 2%, 55% 0%, 60% 3%, 65% 1%, 70% 4%, 75% 0%, 80% 3%, 85% 1%, 90% 4%, 95% 0%, 100% 2%,
+        100% 98%, 95% 100%, 90% 97%, 85% 99%, 80% 96%, 75% 100%, 70% 97%, 65% 99%, 60% 96%, 55% 100%,
+        50% 98%, 45% 100%, 40% 97%, 35% 99%, 30% 96%, 25% 100%, 20% 97%, 15% 99%, 10% 96%, 5% 100%, 0% 98%
+    );
+
+    box-shadow:0 15px 30px rgba(107,79,58,0.18);
+    transform:rotate(-0.5deg);
+}
+
+.lock-note .tape-img{
+    position:absolute;
+    top:-20px;
+    left:50%;
+    width:100px;
+    transform:translateX(-50%) rotate(-3deg);
+    z-index:2;
+}
+
+.lock-note .paperclip-img{
+    position:absolute;
+    top:-14px;
+    right:18px;
+    width:42px;
+    transform:rotate(8deg);
+    z-index:2;
+}
+
+.lock-header{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:8px;
+}
+
+.lock-header h3{
+    margin:0;
+    font-size:19px;
+}
+
+.lock-icon{
+    font-size:20px;
+}
+
+.lock-sub{
+    font-size:14px;
+    opacity:0.85;
+    margin:0 0 18px;
+    border-bottom:1px solid rgba(107,79,58,0.15);
+    padding-bottom:14px;
+}
+
+.fortune-today-box{
+    position:relative;
+    background:rgba(255,255,255,0.55);
+    border-radius:10px;
+    padding:18px 16px 14px;
+    margin-bottom:18px;
+}
+
+.fortune-today-label{
+    position:absolute;
+    top:-12px;
+    left:14px;
+    background:rgba(230,170,150,0.5);
+    padding:4px 12px;
+    border-radius:6px;
+    font-size:12px;
+    font-weight:700;
+}
+
+.fortune-today-box p{
+    margin:8px 0 0;
+    font-weight:600;
+    font-size:15px;
+}
+
+.next-fortune-label{
+    text-align:center;
+    font-size:14px;
+    margin-bottom:12px;
+    opacity:0.9;
+}
+
+.countdown-box{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    background:rgba(222,196,160,0.35);
+    border-radius:14px;
+    padding:14px 10px;
+}
+
+.countdown-item{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    min-width:50px;
+}
+
+.countdown-item span{
+    font-size:26px;
+    font-weight:700;
+}
+
+.countdown-item small{
+    font-size:11px;
+    opacity:0.7;
+}
+
+.countdown-sep{
+    font-size:22px;
+    font-weight:700;
+    opacity:0.5;
+}
+
+@media (max-width:768px){
+    .lock-note{
+        padding:30px 18px 22px;
+    }
+    .countdown-item span{
+        font-size:20px;
+    }
+}
+
+/* === INFO CARDS (Favorit / History / Kategori) === */
+.info-cards{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap:20px;
+    max-width:900px;
+    width:90%;
+    margin-top:35px;
+}
+
+.info-card{
+    background:rgba(255,255,255,0.5);
+    backdrop-filter:blur(10px);
+    border-radius:18px;
+    padding:25px 20px;
+    text-align:center;
+    color:#6b4f3a;
+    display:flex;
+    flex-direction:column;
+    box-shadow:0 8px 20px rgba(107,79,58,0.08);
+}
+
+.info-card-icon{
+    width:50px;
+    height:50px;
+    border-radius:50%;
+    background:rgba(255,248,240,0.9);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:22px;
+    margin:0 auto 12px;
+}
+
+.info-card h3{
+    margin:0 0 8px;
+    font-size:18px;
+}
+
+.info-card p{
+    font-size:13px;
+    opacity:0.85;
+    flex-grow:1;
+    margin:0 0 15px;
+}
+
+.info-card-divider{
+    border-top:1px solid rgba(107,79,58,0.15);
+    margin-bottom:15px;
+}
+
+.card-btn{
+    font-size:14px;
+    padding:10px 18px;
+    width:100%;
+}
+
+@media (max-width:768px){
+    .info-cards{
+        grid-template-columns: 1fr;
+    }
+}
+
+
+
+/* === FAVORIT === */
+.favorit-overlay{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.4);
+    z-index:10;
+    justify-content:center;
+    align-items:center;
+}
+
+.favorit-overlay.tampil{
+    display:flex;
+}
+
+.favorit-box{
+    background:rgba(255,248,240,0.95);
+    backdrop-filter:blur(10px);
+    border-radius:20px;
+    padding:25px;
+    max-width:400px;
+    width:85%;
+    max-height:70vh;
+    overflow-y:auto;
+    color:#6b4f3a;
+    text-align:left;
+}
+
+.favorit-item{
+    background:rgba(255,255,255,0.5);
+    border-radius:12px;
+    padding:10px 14px;
+    margin-bottom:10px;
+    font-size:14px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+}
+
+.favorit-item button{
+    padding:4px 10px;
+    font-size:13px;
+    box-shadow:none;
+}
+
+.favorit-kosong{
+    text-align:center;
+    opacity:0.7;
+    padding:20px 0;
+}
+
+/* === HISTORY (tambahan kecil) === */
+.history-waktu{
+    display:block;
+    font-size:11px;
+    opacity:0.6;
+    margin-top:4px;
+}
+
+.favorit-box-actions{
+    display:flex;
+    gap:10px;
+    justify-content:center;
+    margin-top:10px;
+}
+
+/* === FOOTER === */
+.site-footer{
+    margin-top:40px;
+    margin-bottom:20px;
+    display:flex;
+    align-items:center;
+    gap:14px;
+    color:#6b4f3a;
+    opacity:0.6;
+    font-size:13px;
+}
+
+.site-footer .garis{
+    width:60px;
+    height:1px;
+    background:rgba(107,79,58,0.3);
+}
+
+@media (max-width:768px){
+    .site-footer{
+        font-size:11px;
+        gap:8px;
+    }
+    .site-footer .garis{
+        width:35px;
+    }
+}
+
 </style>
 
 </head>
@@ -186,23 +642,128 @@ button{
     <div id="love-container"></div>
 
     <h1>
-    <img src="Fortune_Cookie.png" class="cookie-title">
+    <img src="assets/Fortune_Cookie.png" class="cookie-title">
     Fortune Cookie
     </h1>
 
     <p>Klik cookie untuk menerima pesan rahasia</p>
 
+    <div id="kategori-container">
+    <button class="kat-btn active" data-kat="random"><span class="kat-icon">🎲</span> Random</button>
+    <button class="kat-btn" data-kat="love"><span class="kat-icon">💖</span> Love</button>
+    <button class="kat-btn" data-kat="career"><span class="kat-icon">💼</span> Career</button>
+    <button class="kat-btn" data-kat="motivasi"><span class="kat-icon">✨</span> Motivasi</button>
+    </div>
+
     <button id="cookieBtn">
     -`♡´- Reveal Message
     </button>
 
+    <div id="lockMessage" class="lock-wrapper" style="display:none;">
+
+    <img src="assets/tape.png" class="tape-img">
+    <img src="assets/paper_clip.png" class="paperclip-img">
+
+    <div class="lock-note">
+        <div class="lock-header">
+            <span class="lock-icon">🔒</span>
+            <h3>Fortune hari ini sudah diambil</h3>
+        </div>
+        <p class="lock-sub">Balik lagi besok untuk pesan baru dari fortune cookie!</p>
+
+        <div class="fortune-today-box">
+            <span class="fortune-today-label">Fortune hari ini:</span>
+            <p id="fortuneTodayText"></p>
+        </div>
+
+        <div class="next-fortune-label">📅 Fortune berikutnya tersedia besok</div>
+
+        <div class="countdown-box">
+            <div class="countdown-item">
+                <span id="cdJam">00</span>
+                <small>Jam</small>
+            </div>
+            <span class="countdown-sep">:</span>
+            <div class="countdown-item">
+                <span id="cdMenit">00</span>
+                <small>Menit</small>
+            </div>
+            <span class="countdown-sep">:</span>
+            <div class="countdown-item">
+                <span id="cdDetik">00</span>
+                <small>Detik</small>
+            </div>
+        </div>
+    </div>
+
+</div>
+
     <div id="pesan"></div>
+
+    <br>
+    <div class="aksi-pesan">
+        <button id="favBtn" style="display:none;">☆ Simpan ke Favorit</button>
+        <button id="shareBtn" style="display:none;">📤 Bagikan</button>
+    </div>
+
+    <div class="info-cards">
+
+        <div class="info-card">
+            <div class="info-card-icon">⭐</div>
+            <h3>⭐ Favorit</h3>
+            <p>Simpan pesan yang paling berkesan untuk kamu.</p>
+            <div class="info-card-divider"></div>
+            <button id="lihatFavBtn" class="card-btn">Lihat Favorit →</button>
+        </div>
+
+        <div class="info-card">
+            <div class="info-card-icon">📜</div>
+            <h3>📜 History</h3>
+            <p>Lihat kembali semua pesan fortune yang pernah kamu dapatkan.</p>
+            <div class="info-card-divider"></div>
+            <button id="lihatHistoryBtn" class="card-btn">Lihat History →</button>
+        </div>
+
+        <div class="info-card">
+            <div class="info-card-icon">🗂️</div>
+            <h3>🗂️ Kategori</h3>
+            <p>Pilih kategori yang sesuai dengan suasana hatimu.</p>
+            <div class="info-card-divider"></div>
+            <button id="lihatKategoriBtn" class="card-btn">Lihat Kategori →</button>
+        </div>
+
+    </div>
+
+    <div class="site-footer">
+        <span class="garis"></span>
+        <span>Dibuat dengan 🤍 oleh Bii</span>
+        <span class="garis"></span>
+    </div>
+
+    <div id="favoritOverlay" class="favorit-overlay">
+        <div class="favorit-box">
+            <h3>⭐ Favorit Kamu</h3>
+            <div id="favoritList"></div>
+            <button id="tutupFavBtn">Tutup</button>
+        </div>
+    </div>
+
+    <div id="historyOverlay" class="favorit-overlay">
+        <div class="favorit-box">
+            <h3>📜 History Fortune</h3>
+            <div id="historyList"></div>
+            <div class="favorit-box-actions">
+                <button id="hapusHistoryBtn">🗑️ Hapus Semua</button>
+                <button id="tutupHistoryBtn">Tutup</button>
+            </div>
+        </div>
+    </div>
 
     <script>
 
 const daftarPesan = [
 
-"✨ Kamu hebat hari ini.",
+"✨ Kamu hebat hari inii.",
 
 "🌷 Jangan lupa istirahat sebentar.",
 
@@ -252,7 +813,7 @@ const daftarPesan = [
 
 "💖 Ada hal baik yang sedang diam-diam mendekat.",
 
-"🫧 Tidak semua hari harus produktif untuk tetap berharga.",
+"Tidak semua hari harus produktif untuk tetap berharga.",
 
 "👀 Aku tahu rahasiamu... eh nggak jadi deng.",
 
@@ -274,7 +835,7 @@ const daftarPesan = [
 
 "🚨 Tingkat overthinking terdeteksi meningkat.",
 
-"🫵 Iya kamu. Yang lagi baca ini.",
+"Iya kamu. Yang lagi baca ini.",
 
 "😌 Tenang, aku nggak akan membocorkan draft-chat yang belum kamu kirim.",
 
@@ -298,54 +859,441 @@ const daftarPesan = [
 
 ];
 
+const pesanLove = [
+    "💌 Ada seseorang yang senang saat melihat namamu muncul.",
+    "💖 Ada hal baik yang sedang diam-diam mendekat.",
+    "💌 Ada yang suka kamu. Atau suka pinjam pulpenmu.",
+    "🕵️ Aku tahu siapa crush-mu... tapi aku profesional.",
+    "😌 Draft chat yang belum kamu kirim itu... mungkin sudah saatnya dikirim.",
+    "💕 Seseorang sedang menulis pesan untukmu, mungkin.",
+    "🌸 Cinta datang pelan-pelan, seperti koneksi Wi-Fi di tempat ramai.",
+    "🥰 Kamu lebih mudah dicintai dari yang kamu kira.",
+    "Hal kecil yang kamu lakukan ternyata diingat oleh seseorang.",
+    "💐 Hubungan yang baik dimulai dari jadi teman yang baik untuk diri sendiri.",
+    "🌹 Ada yang diam-diam mendoakanmu setiap hari.",
+    "🎀 Seseorang menyimpan fotomu di album favorit.",
+];
+
+const pesanCareer = [
+    "📈 Kerja kerasmu sedang dilihat, meski belum terasa.",
+    "🗂️ Satu langkah kecil hari ini lebih baik dari rencana besar yang tak dimulai.",
+    "💼 Progres yang lambat tetap progres.",
+    "🖥️ Deadline itu bisa dihadapi. Kamu sudah melakukannya sebelumnya.",
+    "📊 Skill-mu sedang berkembang, bahkan di hari yang terasa mandek.",
+    "🚀 Ide besarmu layak mendapat satu jam fokus hari ini.",
+    "📝 Tugas yang ditunda akan lebih ringan jika dimulai sekarang, meski hanya 5 menit.",
+    "🏆 Kesuksesan orang lain bukan pengurangan dari milikmu.",
+    "🔑 Pintu yang tepat akan terbuka untuk orang yang terus mengetuk.",
+    "🌟 Rekruter impianmu mungkin sedang mencari seseorang sepertimu.",
+    "💡 Satu ide yang dieksekusi lebih berharga dari sepuluh yang hanya dipikirkan.",
+    "🤝 Kolaborasi yang tepat sedang menunggumu.",
+];
+
+const pesanMotivasi = [
+    "🌷 Versi dirimu yang dulu pasti bangga melihatmu sekarang.",
+    "🧸 Kamu layak diperlakukan dengan lembut, termasuk oleh dirimu sendiri.",
+    "🌻 Jangan bandingkan bab 2 hidupmu dengan bab 20 orang lain.",
+    "🫧 Tidak semua hari harus produktif untuk tetap berharga.",
+    "✨ Hari ini kamu lebih keren dari yang kamu kira.",
+    "💪 Kamu sudah melewati hari-hari yang lebih berat dari ini.",
+    "🌈 Setelah semua yang kamu lalui, kamu masih di sini. Itu bukan kebetulan.",
+    "🌱 Tumbuh itu tidak selalu terlihat, tapi selalu terjadi.",
+    "⭐ Kamu tidak harus jadi sempurna untuk jadi luar biasa.",
+    "🦋 Perubahan terbaik sering datang dari momen yang paling tidak nyaman.",
+    "📮 Semesta menitip pesan: pelan-pelan juga tetap maju.",
+    "🍀 Keberuntungan sedang mencari alamatmu.",
+];
+
+const pesanKategori = {
+    random: daftarPesan,
+    love: pesanLove,
+    career: pesanCareer,
+    motivasi: pesanMotivasi,
+};
+
+let kategoriAktif = "random";
+
+// === RARITY === //
+
+const pesanRare = [
+    "🍀 Hari ini, keberuntungan beneran berpihak padamu.",
+    "🌟 Kamu baru saja membuka pesan yang nggak semua orang dapat.",
+    "🎯 Sesuatu yang kamu tunggu akan datang lebih cepat dari perkiraan.",
+    "🔮 Semesta sedang menyiapkan kejutan kecil khusus untukmu.",
+    "🌙 Malam ini langit menyimpan satu harapan untukmu.",
+    "🦄 Kamu baru menemukan fortune yang langka. Selamat!",
+    "💫 Ada momen baik yang sedang menunggu giliran untuk terjadi.",
+];
+
+const pesanLegendary = [
+    "✨ Seseorang sedang diam-diam bangga padamu.",
+    "👑 Kamu baru mendapat fortune paling langka. Hari ini akan jadi hari yang kamu ingat.",
+    "🌠 Bintang jatuh sekali setahun, dan kamu baru menangkapnya lewat fortune ini.",
+    "💛 Ada cinta yang sedang tumbuh untukmu, entah dari mana asalnya.",
+    "🏆 Dari ribuan kemungkinan, semesta memilih pesan ini untukmu hari ini.",
+];
+
+function rollRarity(){
+    const roll = Math.random() * 100;
+
+    if(roll < 50) return "legendary";     // 2%
+    if(roll < 10) return "rare";         // 8%
+    if(roll < 30) return "uncommon";     // 20%
+    return "common";                      // 70%
+}
+
+// === FAVORIT ===
+function ambilFavorit(){
+    return JSON.parse(localStorage.getItem("fortuneFavorit") || "[]");
+}
+
+function simpanFavorit(list){
+    localStorage.setItem("fortuneFavorit", JSON.stringify(list));
+}
+
+let pesanSaatIni = "";
+
+function perbaruiTombolFavorit(){
+    const daftar = ambilFavorit();
+    if(daftar.includes(pesanSaatIni)){
+        favBtn.innerHTML = "★ Tersimpan di Favorit";
+    } else {
+        favBtn.innerHTML = "☆ Simpan ke Favorit";
+    }
+}
+
+// === HISTORY ===
+function ambilHistory(){
+    return JSON.parse(localStorage.getItem("fortuneHistory") || "[]");
+}
+
+function simpanHistory(list){
+    localStorage.setItem("fortuneHistory", JSON.stringify(list));
+}
+
+function tambahHistory(teks, kategori, rarity){
+    const daftar = ambilHistory();
+
+    daftar.unshift({
+        teks: teks,
+        kategori: kategori,
+        rarity: rarity || "common",
+        waktu: new Date().toLocaleString("id-ID", { dateStyle: "short", timeStyle: "short" })
+    });
+
+    if(daftar.length > 20){
+        daftar.length = 20;
+    }
+
+    simpanHistory(daftar);
+}
+
+function labelKategori(kat){
+    const label = {
+        random: "🎲 Random",
+        love: "💖 Love",
+        career: "💼 Career",
+        motivasi: "✨ Motivasi"
+    };
+    return label[kat] || kat;
+}
+
+
+// === DAILY FORTUNE ===
+const BATAS_HARIAN = 3;
+
+function tanggalHariIni(){
+    const d = new Date();
+    return d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
+}
+
+function sudahBukaHariIni(){
+    return localStorage.getItem("fortuneLastOpen") === tanggalHariIni();
+}
+
+function ambilJumlahKlikHariIni(){
+    if(!sudahBukaHariIni()) return 0;
+    return parseInt(localStorage.getItem("fortuneOpenCount") || "0", 10);
+}
+
+function sudahMencapaiLimit(){
+    return ambilJumlahKlikHariIni() >= BATAS_HARIAN;
+}
+
+function sisaWaktuObjek(){
+    const sekarang = new Date();
+    const besok = new Date();
+    besok.setHours(24, 0, 0, 0);
+
+    const selisihMs = besok - sekarang;
+
+    const jam = Math.floor(selisihMs / (1000 * 60 * 60));
+    const menit = Math.floor((selisihMs % (1000 * 60 * 60)) / (1000 * 60));
+    const detik = Math.floor((selisihMs % (1000 * 60)) / 1000);
+
+    return { jam, menit, detik };
+}
+
+function duaDigit(angka){
+    return angka.toString().padStart(2, "0");
+}
+
+let lockInterval = null;
+
+function perbaruiTeksKunci(){
+    const sisa = sisaWaktuObjek();
+
+    document.getElementById("cdJam").textContent = duaDigit(sisa.jam);
+    document.getElementById("cdMenit").textContent = duaDigit(sisa.menit);
+    document.getElementById("cdDetik").textContent = duaDigit(sisa.detik);
+}
+
+function tampilkanKunci(){
+    tombol.style.display = "none";
+    pesan.style.display = "none";
+    favBtn.style.display = "none";
+    shareBtn.style.display = "none";
+
+    lockMessage.style.display = "block";
+
+    const fortuneTersimpan = localStorage.getItem("fortuneTodayText") || "";
+    document.getElementById("fortuneTodayText").textContent = fortuneTersimpan;
+
+    perbaruiTeksKunci();
+
+    if(lockInterval) clearInterval(lockInterval);
+    lockInterval = setInterval(() => {
+        if(!sudahBukaHariIni()){
+            bukaKunci();
+        } else {
+            perbaruiTeksKunci();
+        }
+    }, 1000);
+}
+
+function bukaKunci(){
+    clearInterval(lockInterval);
+    localStorage.setItem("fortuneOpenCount", "0");
+    lockMessage.style.display = "none";
+    tombol.style.display = "inline-block";
+    tombol.innerHTML = "-`♡´- Reveal Message";
+}
+
 const tombol = document.getElementById("cookieBtn");
 const pesan = document.getElementById("pesan");
 
+const favBtn = document.getElementById("favBtn");
+const shareBtn = document.getElementById("shareBtn");
+const lihatFavBtn = document.getElementById("lihatFavBtn");
+const favoritOverlay = document.getElementById("favoritOverlay");
+const favoritList = document.getElementById("favoritList");
+const tutupFavBtn = document.getElementById("tutupFavBtn");
+
+const lihatHistoryBtn = document.getElementById("lihatHistoryBtn");
+const historyOverlay = document.getElementById("historyOverlay");
+const historyList = document.getElementById("historyList");
+const tutupHistoryBtn = document.getElementById("tutupHistoryBtn");
+const hapusHistoryBtn = document.getElementById("hapusHistoryBtn");
+
+document.querySelectorAll(".kat-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+        document.querySelectorAll(".kat-btn").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        kategoriAktif = btn.dataset.kat;
+
+        pesan.style.display = "none";
+        tombol.innerHTML = "-`♡´- Reveal Message";
+        loveContainer.innerHTML = "";
+    });
+});
+
 tombol.addEventListener("click", () => {
 
-    const random =
-    daftarPesan[Math.floor(Math.random() * daftarPesan.length)];
+    if(sudahMencapaiLimit()){
+        tampilkanKunci();
+        return;
+    }
+
+    const rarity = rollRarity();
+    let random;
+
+    if(rarity === "rare"){
+        random = pesanRare[Math.floor(Math.random() * pesanRare.length)];
+    } else if(rarity === "legendary"){
+        random = pesanLegendary[Math.floor(Math.random() * pesanLegendary.length)];
+    } else {
+        const daftarAktif = pesanKategori[kategoriAktif];
+        random = daftarAktif[Math.floor(Math.random() * daftarAktif.length)];
+    }
+
+    let badge = "";
+    if(rarity === "rare") badge = "<div class='rarity-badge rare'>🍀 RARE FORTUNE</div>";
+    if(rarity === "legendary") badge = "<div class='rarity-badge legendary'>✨✨ LEGENDARY FORTUNE ✨✨</div>";
 
     pesan.style.display = "block";
-    pesan.classList.remove("show");
+    pesan.classList.remove("show", "rare-glow", "legendary-glow");
     void pesan.offsetWidth;
     pesan.classList.add("show");
+    if(rarity === "rare") pesan.classList.add("rare-glow");
+    if(rarity === "legendary") pesan.classList.add("legendary-glow");
+
     pesan.innerHTML =
-    "<b> ❤︎♡ Pesan untukmu hari ini</b><br><br>" + random;
+    badge + "<b> ❤︎♡ Pesan untukmu hari ini</b><br><br>" + random;
     tombol.innerHTML = "🥠 Open Another Fortune";
 
-loveContainer.innerHTML = "";
+    pesanSaatIni = random;
+    favBtn.style.display = "inline-block";
+    shareBtn.style.display = "inline-block";
+    perbaruiTombolFavorit();
+    tambahHistory(random, kategoriAktif, rarity);
+    const jumlahBaru = ambilJumlahKlikHariIni() + 1;
+    localStorage.setItem("fortuneLastOpen", tanggalHariIni());
+    localStorage.setItem("fortuneOpenCount", jumlahBaru);
+    localStorage.setItem("fortuneTodayText", random);
 
-const jumlahLove =
-window.innerWidth < 768 ? 15 : 25;
+    loveContainer.innerHTML = "";
 
-for(let i = 0; i < jumlahLove; i++){
-    setTimeout(() => {
-        createLove();
-    }, i * 80);
+    const jumlahLove =
+    window.innerWidth < 768 ? 15 : 25;
 
+    for(let i = 0; i < jumlahLove; i++){
+        setTimeout(() => {
+            createLove();
+        }, i * 80);
+    }
 
+});
+
+favBtn.addEventListener("click", () => {
+    let daftar = ambilFavorit();
+
+    if(daftar.includes(pesanSaatIni)){
+        daftar = daftar.filter(p => p !== pesanSaatIni);
+    } else {
+        daftar.push(pesanSaatIni);
+    }
+
+    simpanFavorit(daftar);
+    perbaruiTombolFavorit();
+});
+
+shareBtn.addEventListener("click", async () => {
+    const teks = "🍪 " + pesanSaatIni;
+
+    if(navigator.share){
+        try{
+            await navigator.share({
+                title: "Fortune Cookie",
+                text: teks
+            });
+        } catch(err){
+            console.log("Share dibatalkan atau gagal:", err);
+        }
+    } else if(navigator.clipboard){
+        try{
+            await navigator.clipboard.writeText(teks);
+            shareBtn.innerHTML = "✅ Tersalin!";
+            setTimeout(() => {
+                shareBtn.innerHTML = "📤 Bagikan";
+            }, 2000);
+        } catch(err){
+            console.log("Gagal copy:", err);
+            alert("Gagal menyalin pesan, coba lagi ya.");
+        }
+    } else {
+        alert("Browser ini tidak mendukung fitur share/copy. Coba buka lewat Live Server atau browser lain.");
+    }
+});
+
+lihatFavBtn.addEventListener("click", () => {
+    const daftar = ambilFavorit();
+
+    if(daftar.length === 0){
+        favoritList.innerHTML = "<p class='favorit-kosong'>Belum ada favorit. Simpan pesan favoritmu dulu yuk 🍪</p>";
+    } else {
+        favoritList.innerHTML = daftar.map((p, i) => `
+            <div class="favorit-item">
+                <span>${p}</span>
+                <button onclick="hapusFavorit(${i})">🗑️</button>
+            </div>
+        `).join("");
+    }
+
+    favoritOverlay.classList.add("tampil");
+});
+
+tutupFavBtn.addEventListener("click", () => {
+    favoritOverlay.classList.remove("tampil");
+});
+
+function hapusFavorit(index){
+    const daftar = ambilFavorit();
+    daftar.splice(index, 1);
+    simpanFavorit(daftar);
+    lihatFavBtn.click();
+    perbaruiTombolFavorit();
 }
-    
 
+lihatHistoryBtn.addEventListener("click", () => {
+    const daftar = ambilHistory();
+
+    if(daftar.length === 0){
+        historyList.innerHTML = "<p class='favorit-kosong'>Belum ada history. Klik cookie dulu yuk 🍪</p>";
+    } else {
+        historyList.innerHTML = daftar.map((item, i) => `
+            <div class="favorit-item">
+                <span>
+                    ${item.rarity=== "legendary" ? "✨": ""}${item.rarity === "rare"?"🍀": ""}${item.teks}
+                    <span class="history-waktu">${item.waktu} • ${labelKategori(item.kategori)}</span>
+                </span>
+                <button onclick="hapusHistory(${i})">🗑️</button>
+            </div>
+        `).join("");
+    }
+
+    historyOverlay.classList.add("tampil");
+});
+
+tutupHistoryBtn.addEventListener("click", () => {
+    historyOverlay.classList.remove("tampil");
+});
+
+hapusHistoryBtn.addEventListener("click", () => {
+    simpanHistory([]);
+    lihatHistoryBtn.click();
+});
+
+function hapusHistory(index){
+    const daftar = ambilHistory();
+    daftar.splice(index, 1);
+    simpanHistory(daftar);
+    lihatHistoryBtn.click();
+}
+
+document.getElementById("lihatKategoriBtn").addEventListener("click", () => {
+    const kategoriBox = document.getElementById("kategori-container");
+
+    kategoriBox.scrollIntoView({ behavior: "smooth", block: "center" });
+
+    kategoriBox.classList.add("kategori-highlight");
+    setTimeout(() => {
+        kategoriBox.classList.remove("kategori-highlight");
+    }, 1000);
 });
 
 const loveContainer = document.getElementById("love-container");
 
 function createLove() {
     const love = document.createElement("img");
-    love.src = "love.png";
+    love.src = "assets/love.png";
     love.classList.add("love");
 
-    // posisi random lebih “liar”
     love.style.left = Math.random() * 100 + "vw";
     love.style.top = Math.random() * 100 + "vh";
 
-    // size random lebih variatif
     const size = 15 + Math.random() * 60;
     love.style.width = size + "px";
 
-    // rotasi random (lebih ekstrem)
     const rotate = Math.random() * 360;
 
      love.style.setProperty(
@@ -353,16 +1301,24 @@ function createLove() {
      rotate + "deg"
     );
 
-    // opacity random biar ada depth
     love.style.opacity = 0.3 + Math.random() * 0.7;
 
-    // speed animasi random
     love.style.animationDuration = (2 + Math.random() * 6) + "s";
 
     loveContainer.appendChild(love);
 }
 
+if(sudahMencapaiLimit()){
+    tampilkanKunci();
+}
 
+if("serviceWorker" in navigator){
+    window.addEventListener("load", () => {
+        navigator.serviceWorker.register("service-worker.js")
+            .then(() => console.log("Service Worker berhasil didaftarkan ✅"))
+            .catch((err) => console.log("Service Worker gagal:", err));
+    });
+}
 
 </script>
 </body>
