@@ -281,6 +281,11 @@ button{
     animation: legendaryShimmer 1.5s ease-in-out infinite;
 }
 
+.rarity-badge.rare{
+    background: rgba(255,215,130,0.5);
+    color: #8a6d1f;
+}
+
 @keyframes legendaryShimmer{
     0%, 100%{opacity:1;}
     50%{opacity:0.65;}
@@ -357,23 +362,6 @@ button{
     transform:rotate(-0.5deg);
 }
 
-.lock-note .tape-img{
-    position:absolute;
-    top:-20px;
-    left:50%;
-    width:100px;
-    transform:translateX(-50%) rotate(-3deg);
-    z-index:2;
-}
-
-.lock-note .paperclip-img{
-    position:absolute;
-    top:-14px;
-    right:18px;
-    width:42px;
-    transform:rotate(8deg);
-    z-index:2;
-}
 
 .lock-header{
     display:flex;
@@ -662,7 +650,7 @@ button{
     <div id="lockMessage" class="lock-wrapper" style="display:none;">
 
     <img src="assets/tape.png" class="tape-img">
-    <img src="assets/paper_clip.png" class="paperclip-img">
+    <!-- <img src="assets/paper_clip.png" class="paperclip-img"> -->
 
     <div class="lock-note">
         <div class="lock-header">
@@ -936,7 +924,7 @@ const pesanLegendary = [
 function rollRarity(){
     const roll = Math.random() * 100;
 
-    if(roll < 50) return "legendary";     // 2%
+    if(roll < 2) return "legendary";     // 2%
     if(roll < 10) return "rare";         // 8%
     if(roll < 30) return "uncommon";     // 20%
     return "common";                      // 70%
